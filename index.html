@@ -8,10 +8,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
   <style>
     /* ================================================================
-       NOVA Store — styles.css (VERSIÓN COMPLETA)
+       NOVA Store — ESTILOS COMPLETOS
        ================================================================ */
-
-    /* ── Variables ── */
     :root {
       --c-bg: #f5f4f0;
       --c-surface: #ffffff;
@@ -25,20 +23,16 @@
       --c-accent-dim: rgba(255,79,43,.12);
       --c-gold: #d4a84b;
       --c-green: #22c55e;
-      --c-blue: #3b82f6;
-      --c-purple: #8b5cf6;
       --radius: 16px;
       --radius-sm: 10px;
       --radius-lg: 24px;
       --shadow: 0 4px 24px rgba(0,0,0,.08);
       --shadow-lg: 0 12px 48px rgba(0,0,0,.14);
-      --shadow-xl: 0 24px 80px rgba(0,0,0,.18);
       --header-h: 72px;
       --transition: .3s cubic-bezier(.4,0,.2,1);
       --font-display: 'Syne', sans-serif;
       --font-body: 'DM Sans', sans-serif;
     }
-
     [data-theme="dark"] {
       --c-bg: #0f0f0d;
       --c-surface: #1a1916;
@@ -47,11 +41,7 @@
       --c-text: #f0eeea;
       --c-text2: #9c9890;
       --c-text3: #6b6860;
-      --c-accent-dim: rgba(255,79,43,.18);
-      --shadow: 0 4px 24px rgba(0,0,0,.4);
-      --shadow-lg: 0 12px 48px rgba(0,0,0,.5);
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
     body {
@@ -63,14 +53,10 @@
       overflow-x: hidden;
     }
     a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; display: block; }
     ul { list-style: none; }
     button { font-family: inherit; cursor: pointer; border: none; background: none; }
-    input, select { font-family: inherit; }
-
     .container { width: min(1240px, 100%); margin-inline: auto; padding-inline: 24px; }
     @media (max-width: 480px) { .container { padding-inline: 16px; } }
-
     .section { padding-block: 96px; }
     @media (max-width: 768px) { .section { padding-block: 64px; } }
     .section-head { text-align: center; margin-bottom: 56px; }
@@ -82,8 +68,6 @@
       margin-bottom: 12px;
     }
     .section-title span { color: var(--c-accent); }
-    .section-sub { color: var(--c-text2); font-size: 1.05rem; max-width: 520px; margin-inline: auto; }
-
     .btn {
       display: inline-flex;
       align-items: center;
@@ -94,7 +78,6 @@
       font-weight: 600;
       font-size: .95rem;
       transition: all var(--transition);
-      white-space: nowrap;
       cursor: pointer;
     }
     .btn-primary {
@@ -109,13 +92,180 @@
       border: 2px solid var(--c-border);
     }
     .btn-ghost:hover { border-color: var(--c-accent); color: var(--c-accent); }
-
-    /* Payment Methods Section */
+    .icon-btn {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+    .icon-btn:hover { background: var(--c-accent); color: #fff; }
+    .cart-count {
+      position: absolute;
+      top: -4px; right: -4px;
+      background: var(--c-accent);
+      color: #fff;
+      font-size: .65rem;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--c-bg);
+    }
+    .header {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: var(--header-h);
+      background: rgba(var(--c-bg), .8);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--c-border);
+      transition: all var(--transition);
+    }
+    .header-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding-inline: 24px;
+    }
+    @media (max-width: 768px) { .header-inner { gap: 16px; } }
+    .logo { display: flex; align-items: center; gap: 8px; }
+    .logo-mark { font-size: 1.6rem; color: var(--c-accent); }
+    .logo-text { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; }
+    .nav { margin-left: auto; }
+    @media (max-width: 768px) {
+      .nav {
+        position: fixed;
+        inset: var(--header-h) 0 auto auto;
+        width: min(280px, 85%);
+        background: var(--c-surface);
+        border-left: 1px solid var(--c-border);
+        transform: translateX(100%);
+        transition: transform var(--transition);
+        padding: 24px;
+        z-index: 999;
+      }
+      .nav.open { transform: translateX(0); }
+      .nav-list { flex-direction: column; gap: 0; }
+    }
+    .nav-list { display: flex; gap: 4px; }
+    .nav-link { padding: 8px 14px; border-radius: 8px; color: var(--c-text2); transition: all var(--transition); }
+    .nav-link:hover { color: var(--c-accent); background: var(--c-accent-dim); }
+    .header-actions { display: flex; align-items: center; gap: 10px; margin-left: 16px; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; width: 40px; height: 40px; align-items: center; justify-content: center; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 50%; }
+    @media (max-width: 768px) { .hamburger { display: flex; } }
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: var(--header-h);
+      position: relative;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      padding-block: 80px;
+    }
+    @media (max-width: 768px) { .hero-inner { grid-template-columns: 1fr; text-align: center; } .hero-visual { display: none; } }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+    .hero-title em { color: var(--c-accent); }
+    .hero-sub { color: var(--c-text2); font-size: 1.1rem; margin-bottom: 36px; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; }
+    .hero-stats { display: flex; gap: 32px; }
+    .stat strong { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; display: block; }
+    .categories-strip {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding-block: 32px;
+      border-bottom: 1px solid var(--c-border);
+      justify-content: center;
+    }
+    .cat-chip {
+      padding: 8px 20px;
+      border-radius: 50px;
+      border: 1px solid var(--c-border);
+      background: var(--c-surface);
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+    .cat-chip.active { background: var(--c-accent); color: #fff; border-color: var(--c-accent); }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+    .product-card {
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .product-img-wrap { height: 180px; display: flex; align-items: center; justify-content: center; background: var(--c-surface2); font-size: 4rem; }
+    .product-info { padding: 16px; }
+    .product-name { font-family: var(--font-display); font-weight: 700; margin-bottom: 6px; }
+    .product-price { font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; color: var(--c-accent); }
+    .add-to-cart {
+      background: var(--c-accent);
+      color: #fff;
+      border-radius: 10px;
+      padding: 8px 16px;
+      font-size: .8rem;
+      font-weight: 600;
+      margin-top: 12px;
+      width: 100%;
+    }
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+    .offer-card {
+      background: var(--c-surface);
+      border: 2px solid var(--c-accent);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+    }
+    .offer-badge {
+      position: absolute;
+      top: 12px; right: 12px;
+      background: var(--c-accent);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-weight: 800;
+    }
+    .offer-img { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 4rem; background: var(--c-surface2); }
+    .offer-info { padding: 16px; }
+    .offer-new-price { font-size: 1.4rem; font-weight: 800; color: var(--c-accent); }
+    .offer-old-price { text-decoration: line-through; color: var(--c-text3); font-size: .9rem; margin-left: 8px; }
     .payment-methods {
       background: var(--c-surface);
       border-radius: var(--radius-lg);
       padding: 32px;
-      margin-top: 48px;
+      margin: 48px 0;
       border: 1px solid var(--c-border);
     }
     .payment-title {
@@ -144,97 +294,128 @@
     .payment-item:hover { transform: translateY(-4px); background: var(--c-accent-dim); }
     .payment-icon { font-size: 2rem; }
     .payment-name { font-size: .8rem; font-weight: 600; color: var(--c-text2); }
-
-    /* Header, Hero, Products, etc - estilos resumidos pero funcionales */
-    .header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: var(--header-h);
-      background: rgba(var(--c-bg), .8); backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--c-border);
-      transition: all var(--transition);
+    .footer {
+      background: var(--c-surface);
+      border-top: 1px solid var(--c-border);
+      padding-top: 64px;
+      margin-top: 64px;
     }
-    .header-inner { height: 100%; display: flex; align-items: center; gap: 32px; padding-inline: 24px; max-width: 1240px; margin: 0 auto; }
-    .logo { display: flex; align-items: center; gap: 8px; }
-    .logo-mark { font-size: 1.6rem; color: var(--c-accent); }
-    .logo-text { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; }
-    .nav-list { display: flex; gap: 4px; }
-    .nav-link { padding: 8px 14px; border-radius: 8px; color: var(--c-text2); }
-    .nav-link:hover { color: var(--c-accent); background: var(--c-accent-dim); }
-    .header-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
-    .icon-btn { width: 40px; height: 40px; border-radius: 50%; background: var(--c-surface); border: 1px solid var(--c-border); display: flex; align-items: center; justify-content: center; transition: all var(--transition); }
-    .icon-btn:hover { background: var(--c-accent); color: #fff; }
-    .cart-count { position: absolute; top: -4px; right: -4px; background: var(--c-accent); color: #fff; font-size: .65rem; min-width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; width: 40px; height: 40px; align-items: center; justify-content: center; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 50%; }
-    @media (max-width: 768px) { .hamburger { display: flex; } .nav { position: fixed; inset: var(--header-h) 0 auto auto; width: 280px; background: var(--c-surface); transform: translateX(100%); transition: transform var(--transition); padding: 24px; } .nav.open { transform: translateX(0); } .nav-list { flex-direction: column; } .header-inner { gap: 16px; } }
-
-    .hero { min-height: 100vh; display: flex; align-items: center; position: relative; padding-top: var(--header-h); }
-    .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; padding-block: 80px; }
-    @media (max-width: 768px) { .hero-inner { grid-template-columns: 1fr; text-align: center; } .hero-visual { display: none; } }
-    .hero-title { font-family: var(--font-display); font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 800; line-height: 1.0; margin-bottom: 24px; }
-    .hero-title em { color: var(--c-accent); }
-    .hero-sub { color: var(--c-text2); font-size: 1.1rem; margin-bottom: 36px; }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; }
-    .hero-stats { display: flex; gap: 32px; }
-    .stat strong { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; display: block; }
-
-    .categories-strip { display: flex; gap: 10px; flex-wrap: wrap; padding-block: 32px; border-bottom: 1px solid var(--c-border); justify-content: center; }
-    .cat-chip { padding: 8px 20px; border-radius: 50px; border: 1px solid var(--c-border); background: var(--c-surface); cursor: pointer; transition: all var(--transition); }
-    .cat-chip.active { background: var(--c-accent); color: #fff; border-color: var(--c-accent); }
-
-    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; margin-top: 32px; }
-    .product-card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius-lg); overflow: hidden; cursor: pointer; transition: all var(--transition); }
-    .product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-    .product-img-wrap { height: 180px; display: flex; align-items: center; justify-content: center; background: var(--c-surface2); font-size: 4rem; }
-    .product-info { padding: 16px; }
-    .product-name { font-family: var(--font-display); font-weight: 700; margin-bottom: 6px; }
-    .product-price { font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; color: var(--c-accent); }
-    .add-to-cart { background: var(--c-accent); color: #fff; border-radius: 10px; padding: 8px 16px; font-size: .8rem; font-weight: 600; margin-top: 12px; width: 100%; }
-
-    .offers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; margin-top: 32px; }
-    .offer-card { background: var(--c-surface); border: 2px solid var(--c-accent); border-radius: var(--radius-lg); overflow: hidden; }
-    .offer-badge { position: absolute; top: 12px; right: 12px; background: var(--c-accent); color: #fff; padding: 6px 12px; border-radius: 12px; font-weight: 800; }
-    .offer-img { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 4rem; background: var(--c-surface2); }
-    .offer-info { padding: 16px; }
-    .offer-new-price { font-size: 1.4rem; font-weight: 800; color: var(--c-accent); }
-    .offer-old-price { text-decoration: line-through; color: var(--c-text3); font-size: .9rem; margin-left: 8px; }
-
-    .footer { background: var(--c-surface); border-top: 1px solid var(--c-border); padding-top: 64px; margin-top: 64px; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
     @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
-    .footer-bottom { display: flex; justify-content: space-between; padding-block: 20px; border-top: 1px solid var(--c-border); font-size: .8rem; }
-
-    /* Modal y Cart Drawer */
-    .modal-overlay { position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,.6); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity var(--transition); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      padding-block: 20px;
+      border-top: 1px solid var(--c-border);
+      font-size: .8rem;
+    }
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(0,0,0,.6);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition);
+    }
     .modal-overlay.open { opacity: 1; pointer-events: all; }
-    .modal-box { background: var(--c-surface); border-radius: var(--radius-lg); width: min(600px, 90%); max-height: 85vh; overflow-y: auto; padding: 24px; }
-    .cart-drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(400px, 100%); background: var(--c-surface); border-left: 1px solid var(--c-border); transform: translateX(100%); transition: transform .3s ease; z-index: 1600; display: flex; flex-direction: column; }
+    .modal-box {
+      background: var(--c-surface);
+      border-radius: var(--radius-lg);
+      width: min(600px, 90%);
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 24px;
+    }
+    .cart-drawer {
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: min(400px, 100%);
+      background: var(--c-surface);
+      border-left: 1px solid var(--c-border);
+      transform: translateX(100%);
+      transition: transform .3s ease;
+      z-index: 1600;
+      display: flex;
+      flex-direction: column;
+    }
     .cart-drawer.open { transform: translateX(0); }
     .cart-header { padding: 20px; border-bottom: 1px solid var(--c-border); display: flex; justify-content: space-between; }
     .cart-items { flex: 1; overflow-y: auto; padding: 16px; }
     .cart-footer { padding: 16px; border-top: 1px solid var(--c-border); }
-
-    /* Chatbot mejorado */
     .chatbot-wrapper { position: fixed; bottom: 28px; right: 28px; z-index: 1400; }
-    .chatbot-fab { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--c-accent), var(--c-accent2)); color: #fff; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 32px rgba(255,79,43,.5); cursor: pointer; transition: all var(--transition); }
-    .chatbot-panel { position: absolute; bottom: 76px; right: 0; width: 360px; max-width: calc(100vw - 40px); max-height: 520px; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 20px; box-shadow: var(--shadow-xl); display: flex; flex-direction: column; overflow: hidden; transform: scale(.8) translateY(20px); opacity: 0; pointer-events: none; transition: all .3s ease; }
+    .chatbot-fab {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--c-accent), var(--c-accent2));
+      color: #fff;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px rgba(255,79,43,.5);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .chatbot-panel {
+      position: absolute; bottom: 76px; right: 0;
+      width: 360px;
+      max-width: calc(100vw - 40px);
+      max-height: 520px;
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: 20px;
+      box-shadow: var(--shadow-xl);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: scale(.8) translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: all .3s ease;
+    }
     .chatbot-wrapper.open .chatbot-panel { transform: scale(1) translateY(0); opacity: 1; pointer-events: all; }
-    .chat-header { background: linear-gradient(135deg, var(--c-accent), var(--c-accent2)); padding: 14px 18px; display: flex; align-items: center; gap: 10px; color: #fff; }
+    .chat-header {
+      background: linear-gradient(135deg, var(--c-accent), var(--c-accent2));
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+    }
     .chat-messages { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
     .chat-msg { max-width: 85%; padding: 10px 14px; border-radius: 16px; font-size: .88rem; word-break: break-word; }
     .chat-msg.bot { background: var(--c-surface2); border: 1px solid var(--c-border); align-self: flex-start; border-bottom-left-radius: 4px; }
     .chat-msg.user { background: var(--c-accent); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
     .quick-replies { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 12px; }
-    .quick-reply { background: var(--c-surface2); border: 1px solid var(--c-border); border-radius: 50px; padding: 5px 12px; font-size: .75rem; cursor: pointer; transition: all var(--transition); }
+    .quick-reply {
+      background: var(--c-surface2);
+      border: 1px solid var(--c-border);
+      border-radius: 50px;
+      padding: 5px 12px;
+      font-size: .75rem;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
     .quick-reply:hover { background: var(--c-accent); color: #fff; }
     .chat-input-area { padding: 12px; border-top: 1px solid var(--c-border); }
     .chat-input-row { display: flex; gap: 8px; }
     .chat-input { flex: 1; padding: 10px 14px; border-radius: 50px; border: 1px solid var(--c-border); background: var(--c-bg); color: var(--c-text); }
     .chat-send { width: 38px; height: 38px; border-radius: 50%; background: var(--c-accent); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-
-    .notification { position: fixed; top: 88px; right: 24px; z-index: 9999; background: var(--c-surface); border-left: 4px solid var(--c-accent); border-radius: 10px; padding: 12px 20px; box-shadow: var(--shadow-lg); transform: translateX(150%); transition: transform .3s ease; }
+    .notification {
+      position: fixed; top: 88px; right: 24px; z-index: 9999;
+      background: var(--c-surface);
+      border-left: 4px solid var(--c-accent);
+      border-radius: 10px;
+      padding: 12px 20px;
+      box-shadow: var(--shadow-lg);
+      transform: translateX(150%);
+      transition: transform .3s ease;
+    }
     .notification.show { transform: translateX(0); }
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-    .hidden { display: none !important; }
   </style>
 </head>
 <body>
@@ -255,148 +436,111 @@
 
   <section class="section" id="offers"><div class="container"><div class="section-head"><h2 class="section-title">Ofertas <span>Especiales</span></h2></div><div class="offers-grid" id="offersGrid"></div></div></section>
 
-  <!-- SECCIÓN DE MÉTODOS DE PAGO AGREGADA -->
   <section class="container"><div class="payment-methods reveal"><h3 class="payment-title">💳 Métodos de Pago Aceptados</h3><div class="payment-icons"><div class="payment-item"><span class="payment-icon">💳</span><span class="payment-name">Visa / Mastercard</span></div><div class="payment-item"><span class="payment-icon">📱</span><span class="payment-name">Mercado Pago</span></div><div class="payment-item"><span class="payment-icon">🟡</span><span class="payment-name">PayPal</span></div><div class="payment-item"><span class="payment-icon">🏦</span><span class="payment-name">Transferencia</span></div><div class="payment-item"><span class="payment-icon">🏪</span><span class="payment-name">OXXO</span></div><div class="payment-item"><span class="payment-icon">📲</span><span class="payment-name">18 MSI</span></div></div></div></section>
 
   <footer class="footer" id="footer"><div class="container footer-grid"><div class="footer-brand"><a href="#" class="logo"><span class="logo-mark">◈</span><span class="logo-text">NOVA</span></a><p>Tu destino tecnológico de confianza.</p></div><div class="footer-col"><h4>Contacto</h4><ul><li>📧 hola@novastore.mx</li><li>📞 800-NOVA-TEC</li></ul></div></div><div class="container footer-bottom"><p>© 2026 NOVA Store</p></div></footer>
 
   <div class="modal-overlay" id="productModal"><div class="modal-box"><button id="modalClose" style="float:right; background:none; border:none; font-size:1.5rem; cursor:pointer;">✕</button><div id="modalContent"></div></div></div>
-  <div class="cart-drawer" id="cartDrawer"><div class="cart-header"><h3>🛍 Carrito</h3><button id="cartClose">✕</button></div><div class="cart-items" id="cartItems"></div><div class="cart-footer" id="cartFooter"><div>Total: <strong id="cartTotal">$0</strong></div><button class="btn btn-primary" onclick="checkout()">Finalizar</button></div></div>
+  <div class="cart-drawer" id="cartDrawer"><div class="cart-header"><h3>🛍 Carrito</h3><button id="cartClose">✕</button></div><div class="cart-items" id="cartItems"></div><div class="cart-footer" id="cartFooter"><div>Total: <strong id="cartTotal">$0</strong></div><button class="btn btn-primary" onclick="window.checkout()">Finalizar</button></div></div>
 
-  <!-- CHATBOT MEJORADO - RESPUESTA A CUALQUIER PREGUNTA -->
   <div class="chatbot-wrapper" id="chatbotWrapper"><button class="chatbot-fab" id="chatbotFab">💬</button><div class="chatbot-panel"><div class="chat-header"><span>🤖</span><strong>Nova Assistant</strong><button class="chat-minimize" id="chatMinimize" style="margin-left:auto; background:rgba(255,255,255,.2); border:none; border-radius:50%; width:28px; height:28px; color:#fff;">−</button></div><div class="chat-messages" id="chatMessages"></div><div class="quick-replies" id="quickReplies"></div><div class="chat-input-area"><div class="chat-input-row"><input type="text" id="chatInput" class="chat-input" placeholder="Escribe tu pregunta..." /><button class="chat-send" id="chatSend">➤</button></div></div></div></div>
 
   <script>
-    // ==================== DATOS ====================
+    // ==================== DATOS DE PRODUCTOS ====================
     const PRODUCTS = [
-      { id:1, name:'ProMax X15 Ultra', cat:'smartphones', price:14999, rating:4.9, emoji:'📱', desc:'El mejor smartphone del año.', stock:15 },
-      { id:2, name:'AirPods Nova Pro', cat:'audio', price:4299, rating:4.8, emoji:'🎧', desc:'Audio espacial, ANC.', stock:28 },
-      { id:3, name:'UltraBook Pro 14', cat:'laptops', price:21999, rating:4.7, emoji:'💻', desc:'Laptop profesional.', stock:8 },
-      { id:4, name:'SmartWatch Apex 3', cat:'wearables', price:5499, rating:4.6, emoji:'⌚', desc:'Salud avanzada.', stock:22 },
-      { id:5, name:'GamePad XR Elite', cat:'gaming', price:2799, rating:4.8, emoji:'🎮', desc:'Control háptico.', stock:35 },
-      { id:6, name:'Bocina Boom 360', cat:'audio', price:3299, rating:4.7, emoji:'🔊', desc:'Sonido 360°', stock:12 },
-      { id:7, name:'Tablet Nova Tab', cat:'smartphones', price:11999, rating:4.7, emoji:'📟', desc:'Pantalla AMOLED', stock:9 },
-      { id:8, name:'Teclado Mec Pro', cat:'gaming', price:2199, rating:4.6, emoji:'⌨️', desc:'Switches ópticos', stock:18 }
+      { id:1, name:'ProMax X15 Ultra', cat:'smartphones', price:14999, rating:4.9, reviews:2341, emoji:'📱', desc:'El smartphone más potente con cámara de 200MP, 16GB RAM y batería de 6000mAh.', stock:15, color:'Negro, Plateado, Azul', almacenamiento:'256GB/512GB/1TB' },
+      { id:2, name:'AirPods Nova Pro', cat:'audio', price:4299, rating:4.8, reviews:1820, emoji:'🎧', desc:'Audio espacial adaptativo, cancelación activa de ruido y 30h de batería.', stock:28, color:'Blanco', duracionBateria:'30 horas' },
+      { id:3, name:'UltraBook Pro 14', cat:'laptops', price:21999, rating:4.7, reviews:987, emoji:'💻', desc:'Laptop profesional con chip M4, 18h de batería y pantalla Liquid Retina XDR.', stock:8, ram:'32GB', almacenamiento:'1TB SSD' },
+      { id:4, name:'SmartWatch Apex 3', cat:'wearables', price:5499, rating:4.6, reviews:1203, emoji:'⌚', desc:'Salud avanzada: ECG, SpO2, temperatura corporal y GPS.', stock:22, color:'Negro, Plata, Rosa' },
+      { id:5, name:'GamePad XR Elite', cat:'gaming', price:2799, rating:4.8, reviews:3102, emoji:'🎮', desc:'Control inalámbrico con vibración háptica, triggers adaptativos.', stock:35, compatibilidad:'PC, PS5, Xbox, Switch' },
+      { id:6, name:'Bocina Boom 360', cat:'audio', price:3299, rating:4.7, reviews:891, emoji:'🔊', desc:'Sonido 360° con subwoofer, IP67 y 24h de batería.', stock:12, color:'Negro, Azul, Rojo' },
+      { id:7, name:'Tablet Nova Tab', cat:'smartphones', price:11999, rating:4.7, reviews:742, emoji:'📟', desc:'Pantalla AMOLED 11" 120Hz, S-Pen incluida.', stock:9, almacenamiento:'256GB' },
+      { id:8, name:'Teclado Mec Pro RGB', cat:'gaming', price:2199, rating:4.6, reviews:1458, emoji:'⌨️', desc:'Teclado mecánico con switches ópticos y RGB.', stock:18, tipo:'Mecánico', iluminacion:'RGB por tecla' }
     ];
     const OFFER_IDS = [{ id:1, discount:15 }, { id:3, discount:20 }, { id:5, discount:25 }];
     let cart = JSON.parse(localStorage.getItem('nova_cart') || '[]');
     let activeCategory = 'all';
 
-    // ==================== CHATBOT INTELIGENTE - RESPUESTA A CUALQUIER PREGUNTA ====================
+    function formatPrice(n) { return '$' + n.toLocaleString('es-MX'); }
+    function showNotification(msg) { const n = document.getElementById('notification'); n.textContent = msg; n.classList.add('show'); setTimeout(() => n.classList.remove('show'), 2500); }
+    function saveCart() { localStorage.setItem('nova_cart', JSON.stringify(cart)); updateCartCount(); renderCartItems(); }
+    function updateCartCount() { document.getElementById('cartCount').textContent = cart.reduce((s,i) => s + i.qty, 0); }
+    function addToCart(id) { const p = PRODUCTS.find(x => x.id === id); if (!p) return; const existing = cart.find(i => i.id === id); existing ? existing.qty++ : cart.push({ id, qty: 1 }); saveCart(); showNotification(`🛒 ${p.name} agregado`); }
+    window.addToCart = addToCart;
+    window.removeFromCart = function(id) { cart = cart.filter(i => i.id !== id); saveCart(); showNotification('Producto eliminado'); renderCartItems(); };
+    function renderCartItems() { const container = document.getElementById('cartItems'); if (cart.length === 0) { container.innerHTML = '<p style="text-align:center">Carrito vacío</p>'; document.getElementById('cartTotal').textContent = '$0'; return; } let total = 0; container.innerHTML = cart.map(item => { const p = PRODUCTS.find(x => x.id === item.id); if (!p) return ''; const subt = p.price * item.qty; total += subt; return `<div style="display:flex; justify-content:space-between; margin-bottom:12px"><span>${p.name} x${item.qty}</span><span>${formatPrice(subt)}</span><button onclick="removeFromCart(${item.id})" style="background:red; color:white; border:none; border-radius:50%; width:24px; height:24px;">✕</button></div>`; }).join(''); document.getElementById('cartTotal').textContent = formatPrice(total); }
+    window.checkout = function() { if (cart.length === 0) showNotification('Carrito vacío'); else { showNotification('✅ Pedido realizado. Gracias por tu compra!'); cart = []; saveCart(); closeCart(); } };
+    function closeCart() { document.getElementById('cartDrawer').classList.remove('open'); }
+    function openModal(id) { const p = PRODUCTS.find(x => x.id === id); const modal = document.getElementById('productModal'); document.getElementById('modalContent').innerHTML = `<div style="text-align:center"><div style="font-size:4rem">${p.emoji}</div><h2>${p.name}</h2><p>${p.desc}</p><p><strong>${formatPrice(p.price)}</strong></p><p>⭐ ${p.rating}/5 (${p.reviews} reseñas)</p><p>📦 Stock: ${p.stock} unidades</p><button class="btn btn-primary" onclick="addToCart(${p.id}); closeModal()">Agregar al carrito</button></div>`; modal.classList.add('open'); }
+    function closeModal() { document.getElementById('productModal').classList.remove('open'); }
+    window.closeModal = closeModal;
+    function renderProducts() { const grid = document.getElementById('productsGrid'); let filtered = activeCategory === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cat === activeCategory); grid.innerHTML = filtered.map(p => `<div class="product-card" data-id="${p.id}"><div class="product-img-wrap">${p.emoji}</div><div class="product-info"><div class="product-name">${p.name}</div><div class="product-price">${formatPrice(p.price)}</div><button class="add-to-cart" data-id="${p.id}">+ Agregar</button></div></div>`).join(''); document.querySelectorAll('.add-to-cart').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); addToCart(parseInt(btn.dataset.id)); })); document.querySelectorAll('.product-card').forEach(card => card.addEventListener('click', () => openModal(parseInt(card.dataset.id)))); }
+    function renderOffers() { const grid = document.getElementById('offersGrid'); grid.innerHTML = OFFER_IDS.map(({ id, discount }) => { const p = PRODUCTS.find(x => x.id === id); const newPrice = Math.round(p.price * (1 - discount/100)); return `<div class="offer-card"><div class="offer-badge">-${discount}%</div><div class="offer-img">${p.emoji}</div><div class="offer-info"><h3>${p.name}</h3><span class="offer-new-price">${formatPrice(newPrice)}</span><span class="offer-old-price">${formatPrice(p.price)}</span><button class="btn btn-primary" style="margin-top:12px; width:100%" onclick="addToCart(${id})">Aprovechar</button></div></div>`; }).join(''); }
+    
+    document.querySelectorAll('.cat-chip').forEach(chip => chip.addEventListener('click', () => { document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active')); chip.classList.add('active'); activeCategory = chip.dataset.cat; renderProducts(); }));
+    document.getElementById('cartToggle').addEventListener('click', () => { document.getElementById('cartDrawer').classList.add('open'); renderCartItems(); });
+    document.getElementById('cartClose').addEventListener('click', closeCart);
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('hamburger').addEventListener('click', () => document.getElementById('nav').classList.toggle('open'));
+    document.getElementById('themeToggle').addEventListener('click', () => { const dark = document.documentElement.dataset.theme === 'dark'; document.documentElement.dataset.theme = dark ? 'light' : 'dark'; localStorage.setItem('nova_theme', dark ? 'light' : 'dark'); });
+    const savedTheme = localStorage.getItem('nova_theme') || 'light'; document.documentElement.dataset.theme = savedTheme;
+    renderProducts(); renderOffers(); updateCartCount();
+    new IntersectionObserver((entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 }).observe(document.querySelector('.payment-methods'));
+
+    // ==================== CHATBOT CON +150 PREGUNTAS Y RESPUESTAS ====================
+    const CHAT_RESPONSES_DB = [
+      { keywords: [/hola|buenas|qu[eé] tal|como estas|hey|saludos|qu[eé] onda|quiubo|qu[eé] hay de nuevo|qué cuentas|buenos días|buenas tardes|buenas noches/], response: "¡Hola! 👋 Soy Nova, tu asistente virtual. ¡Qué gusto saludarte! Estoy excelente, gracias por preguntar. ¿En qué puedo ayudarte hoy? Puedo decirte qué productos tenemos, precios, stock, métodos de pago, envíos y mucho más. 😊" },
+      { keywords: [/como est[aá]s|qu[eé] tal|qu[eé] onda|bien y t[uú]|cómo te va|cómo andas|qué me cuentas/i], response: "¡Estoy genial! 🌟 Conectado 24/7 para ayudarte con todo sobre tecnología. ¿Tú cómo estás? Cuéntame, ¿necesitas ayuda con algo en particular?" },
+      { keywords: [/gracias|thanks|merci|agradecido|muy amable|excelente respuesta|qué amable|te lo agradezco/i], response: "¡De nada! 🙌 Para eso estoy aquí, para ayudarte. ¿Hay algo más en lo que pueda asistirte?" },
+      { keywords: [/adiós|chao|bye|hasta luego|nos vemos|me voy|hasta pronto|cuídate|nos vemos luego/i], response: "👋 ¡Hasta luego! Si necesitas algo más, aquí estaré. ¡Que tengas un excelente día!" },
+      { keywords: [/qui[eé]n eres|qu[eé] eres|qu[eé] haces|para qu[eé] sirves|qu[eé] puedes hacer|tus funciones|cuéntame de ti|eres robot|eres humano/i], response: "🤖 Soy **Nova Assistant**, tu asistente inteligente de NOVA Store. Fui creado para ayudarte a encontrar productos tecnológicos, decirte precios, stock disponible, métodos de pago, información de envíos, garantías, y resolver cualquier duda que tengas sobre nuestra tienda. ¡Pregúntame lo que sea!" },
+      { keywords: [/cu[aá]ntos productos|cuántos celulares|cuántos hay|total de productos|cuántos art[eí]culos|cantidad de productos|cuántos tenéis|qué cantidad|catálogo completo/i], response: (msg) => { const total = PRODUCTS.length; const byCat = PRODUCTS.reduce((acc, p) => { acc[p.cat] = (acc[p.cat] || 0) + 1; return acc; }, {}); return `📦 Tenemos **${total} productos** en total en nuestro catálogo:\n📱 Smartphones: ${byCat.smartphones || 0}\n💻 Laptops: ${byCat.laptops || 0}\n🎧 Audio: ${byCat.audio || 0}\n🎮 Gaming: ${byCat.gaming || 0}\n⌚ Wearables: ${byCat.wearables || 0}\n¿Te gustaría ver alguno en específico?`; } },
+      { keywords: [/stock|disponible|hay|disponibilidad|cantidad|cuántas unidades|quedan|tienen existencia|tienen en almacén|inventario/i], response: (msg) => { for (let p of PRODUCTS) { if (msg.includes(p.name.toLowerCase())) return `📦 **${p.name}** tiene **${p.stock} unidades** disponibles en stock actualmente. ¿Quieres agregarlo a tu carrito?`; } return "📊 ¿De qué producto quieres saber el stock? Dime el nombre exacto (ej: 'ProMax X15', 'AirPods Nova Pro', 'UltraBook') y te diré cuántas unidades tenemos disponibles."; } },
+      { keywords: [/qu[eé] celular|qu[eé] smartphone|celulares disponibles|tel[eé]fonos|móviles|qué móviles|qué teléfonos|recomiéndame un celular|mejor celular|celular más vendido/i], response: "📱 Estos son nuestros smartphones disponibles:\n• 📱 **ProMax X15 Ultra** — $14,999 (⭐4.9) — El más potente\n• 📟 **Tablet Nova Tab** — $11,999 (⭐4.7) — Con S-Pen\n¿Te interesa alguno? El ProMax es nuestro más vendido con más de 2000 reseñas positivas." },
+      { keywords: [/laptop|computadora|notebook|ultrabook|qué laptops|recomiéndame una laptop|portátil|ordenador portátil|mejor laptop|laptop para trabajar/i], response: "💻 Nuestra laptop estrella es la **UltraBook Pro 14** por $21,999. Tiene chip M4, 32GB RAM, 1TB SSD y 18 horas de batería. ⭐4.7/5 con casi 1000 reseñas. ¿Te gustaría más detalles?" },
+      { keywords: [/audio|aud[ií]fonos|bocina|speaker|airpods|auriculares|qué audífonos|qué bocinas|cascos|headphones|mejores audífonos/i], response: "🎧 En audio tenemos:\n• **AirPods Nova Pro** — $4,299 (ANC, 30h batería) ⭐4.8\n• **Bocina Boom 360** — $3,299 (360°, IP67) ⭐4.7\nAmbos tienen excelente calidad de sonido. ¿Cuál te interesa?" },
+      { keywords: [/gaming|gamer|control|gamepad|teclado|mouse|qué controles|qué teclados|periféricos|para jugar|mejor para gaming/i], response: "🎮 Para gaming tenemos:\n• **GamePad XR Elite** — $2,799 (vibración háptica, triggers adaptativos) ⭐4.8\n• **Teclado Mec Pro RGB** — $2,199 (switches ópticos, RGB) ⭐4.6\n¡Potencia tu experiencia de juego!" },
+      { keywords: [/precio|cu[aá]nto cuesta|valor|cuesta|precio de|qué precio tiene|en cuánto está|cuánto vale/i], response: (msg) => { for (let p of PRODUCTS) { if (msg.includes(p.name.toLowerCase())) return `💰 **${p.name}** cuesta **${formatPrice(p.price)}**. ⭐ Calificación: ${p.rating}/5 basada en ${p.reviews} reseñas. ¿Te gustaría agregarlo al carrito?`; } return "🔍 ¿De qué producto quieres saber el precio? Por ejemplo: 'Precio del ProMax X15', 'Cuánto cuesta el UltraBook Pro 14'."; } },
+      { keywords: [/m[aá]s caro|m[aá]s barato|mejor precio|producto top|el más caro|el más barato|producto más costoso|producto más económico|gama alta|gama baja/i], response: "💰 **Producto más caro:** 💻 UltraBook Pro 14 — $21,999\n🛒 **Producto más barato:** ⌨️ Teclado Mec Pro RGB — $2,199\n¿Te interesa alguno de estos?" },
+      { keywords: [/presupuesto|tengo|busco|quiero gastar|máximo|hasta|monto|disponible|me alcanza|puedo comprar/i], response: (msg) => { const match = msg.match(/\$?(\d{3,})/); if (match) { const budget = parseInt(match[1]); const recom = PRODUCTS.filter(p => p.price <= budget).sort((a,b) => b.rating - a.rating).slice(0,3); if (recom.length) return `💸 Con ${formatPrice(budget)}, te recomiendo:\n${recom.map(p => `• ${p.emoji} ${p.name} — ${formatPrice(p.price)} ⭐${p.rating}`).join('\n')}`; } return "Dime tu presupuesto y te recomiendo productos. Ejemplo: 'Tengo $10,000'"; } },
+      { keywords: [/pago|m[eé]todo de pago|formas de pago|cómo pago|pagar|tarjeta|efectivo|msi|paypal|oxxo|transferencia|cuotas|sin intereses|a crédito|en qué puedo pagar|pago a meses|tarjeta de crédito|tarjeta de débito/i], response: "💳 **Métodos de pago aceptados:**\n• Tarjetas de crédito/débito (Visa, Mastercard, Amex)\n• Mercado Pago\n• PayPal\n• Transferencia bancaria (BBVA, Banamex, Santander)\n• Pago en efectivo en OXXO\n• **¡Hasta 18 MSI sin intereses!** en compras mayores a $3,000" },
+      { keywords: [/env[ií]o|entrega|llegada|tiempo de entrega|shipping|d[ií]as|gratis|cuánto tarda|a dónde env[ií]an|costo de envío|envían a todo méxico|qué días llega|paquetería|mensajería/i], response: "📦 **Información de envíos:**\n• **Envío GRATIS** en compras mayores a $2,000\n• Envío estándar: $149 (3-5 días hábiles)\n• Envío express: $249 (24-48 horas en CDMX)\n• Envíos a toda la República Mexicana\n• Entregas seguras con seguimiento en tiempo real" },
+      { keywords: [/garant[ií]a|devoluci[oó]n|soporte|reclamo|falla|problema|cambio|reembolso|producto defectuoso|no funciona|qué hago si|se dañó|tiene garantía|derecho a devolución/i], response: "🛡 **Garantía y devoluciones:**\n• Todos los productos tienen garantía oficial de **1 año**\n• Laptops y smartphones: **2 años** de garantía extendida\n• Devolución **gratuita** en los primeros 15 días\n• Reembolso completo o cambio sin preguntas\n• Soporte técnico disponible por chat, email o teléfono\n• Línea: 800-NOVA-TEC" },
+      { keywords: [/oferta|descuento|promo|rebaja|barato|econ[oó]mico|aplican descuentos|qué ofertas hay|código de descuento|promociones|cupón|voy ahorrar|precio rebajado/i], response: "🔥 **Ofertas especiales activas:**\n• 📱 ProMax X15 Ultra: -15% → $12,749\n• 💻 UltraBook Pro 14: -20% → $17,599\n• 🎮 GamePad XR Elite: -25% → $2,099\n⏰ ¡No dejes pasar estas oportunidades! Los descuentos son por tiempo limitado." },
+      { keywords: [/contacto|tel[eé]fono|correo|email|dónde están|ubicación|sucursal|horario|atención|atender|llamar|escribir|dónde quedan|dirección|cómo contactarlos|whatsapp/i], response: "📞 **Contacto y horarios:**\n• Email: hola@novastore.mx\n• Teléfono: 800-NOVA-TEC (800-6682-832)\n• WhatsApp: +52 55 1234 5678\n• Atención: Lun-Vie 9am-8pm, Sáb 10am-4pm\n• Tienda física: Av. Masaryk 123, Polanco, CDMX\n• Horario tienda: Lun-Sáb 11am-7pm" },
+      { keywords: [/qu[eé] es|qué hace|cómo funciona|caracter[ií]sticas|especificaciones|detalles de|cuéntame de|información de|describe/i], response: (msg) => { for (let p of PRODUCTS) { if (msg.includes(p.name.toLowerCase())) return `📱 **${p.name}**\n\n${p.desc}\n\n⭐ ${p.rating}/5 (${p.reviews} reseñas)\n💰 ${formatPrice(p.price)}\n📦 Stock: ${p.stock} unidades\n¿Quieres agregarlo al carrito?`; } return "¿De qué producto quieres conocer los detalles? Dime el nombre exacto."; } },
+      { keywords: [/dónde comprar|cómo comprar|proceso de compra|comprar en línea|hacer pedido|realizar compra|quiero comprar|qué necesito para comprar/i], response: "🛒 **Cómo comprar en NOVA Store:**\n1. Explora nuestro catálogo\n2. Agrega productos al carrito\n3. Ve al carrito y haz clic en 'Finalizar'\n4. Ingresa tus datos de envío\n5. Selecciona método de pago\n6. ¡Confirma tu pedido!\n¿Necesitas ayuda con algún paso?" },
+      { keywords: [/factura|facturar|comprobante|invoice|necesito factura|CFDI|RFC|facturación/i], response: "🧾 **Facturación:** Podemos facturar todos tus pedidos. Solo necesitas proporcionarnos tu RFC y domicilio fiscal después de realizar tu compra. ¿Te gustaría que te ayude con el proceso?" },
+      { keywords: [/tarjeta de crédito|crédito|tarjeta|a meses|MSI|sin intereses|12 meses|18 meses|cuotas/i], response: "💳 ¡Sí! Aceptamos tarjetas de crédito con **hasta 18 MSI sin intereses** en compras mayores a $3,000. Participan Visa, Mastercard y American Express. ¿Quieres saber el costo mensual de algún producto?" },
+      { keywords: [/nuevo|novedades|recién llegado|último modelo|productos nuevos|estreno|lanzamiento|acaba de salir|lo más nuevo/i], response: "✨ **Novedades en NOVA Store:**\n• **ProMax X15 Ultra** - Nuestro smartphone más avanzado\n• **AirPods Nova Pro** - Con cancelación de ruido mejorada\n• **SmartWatch Apex 3** - Con monitoreo de salud avanzado\n¿Te interesa alguno de estos?" },
+      { keywords: [/marcas|qué marcas|marca|venden qué marcas|apple|samsung|xiaomi|huawei|sony|microsoft|dell|hp|lenovo|asus|acer/i], response: "🏷️ Trabajamos con las mejores marcas: Apple, Samsung, Xiaomi, Sony, Dell, HP, Lenovo, Asus y más. Todos nuestros productos son originales con garantía oficial. ¿Buscas alguna marca en específico?" },
+      { keywords: [/envío internacional|envían al extranjero|fuera de méxico|a estados unidos|a europa|a latinoamérica|a otros países|internacional/i], response: "🌎 Por el momento, solo realizamos envíos dentro de la República Mexicana. Estamos trabajando para expandirnos a otros países pronto. ¿Te encuentras en México?" },
+      { keywords: [/tienda física|sucursal física|ir a la tienda|visitar|dónde está la tienda|en qué calle|horario tienda|abren sábado|domingo|abren hoy/i], response: "🏪 **Tienda física NOVA Store:**\n📍 Av. Presidente Masaryk 123, Polanco, CDMX\n🕐 Horario: Lunes a Sábado de 11am a 7pm\nDomingo cerrado. ¡Te esperamos!" },
+      { keywords: [/cupón|código de descuento|promo code|cuponazo|descuento adicional|hay códigos|aplicar cupón/i], response: "🏷️ Actualmente no tenemos códigos de descuento adicionales, pero ya tenemos ofertas activas del 15% al 25% en productos seleccionados. ¡Revisa la sección de Ofertas Especiales!" },
+      { keywords: [/tracking|rastrear pedido|dónde está mi pedido|seguimiento|cómo rastreo|número de guía|paquete/i], response: "📦 Para rastrear tu pedido, necesitas el número de guía que enviamos a tu correo. ¿Ya realizaste tu compra? Si es así, revisa tu bandeja de entrada o spam. ¿Necesitas que te ayude con algo más?" },
+      { keywords: [/productos recomendados|qué me recomiendas|sugerencias|cuál compro|ayúdame a elegir|qué es mejor|duda para elegir|entre cuál elijo/i], response: (msg) => { if (msg.includes('celular') || msg.includes('smartphone')) return "📱 Te recomiendo el **ProMax X15 Ultra** por su cámara de 200MP y batería de 6000mAh. Es nuestro más vendido con 4.9 estrellas."; if (msg.includes('laptop') || msg.includes('computadora')) return "💻 La **UltraBook Pro 14** es ideal por su chip M4, 18h de batería y pantalla Retina. Perfecta para trabajo y estudio."; if (msg.includes('audio') || msg.includes('audífonos') || msg.includes('bocina')) return "🎧 Para audio, los **AirPods Nova Pro** tienen cancelación de ruido excepcional. La **Bocina Boom 360** es perfecta para fiestas."; return "¡Claro! ¿Qué tipo de producto buscas? Celular, laptop, audífonos o accesorios para gaming. Dime y te recomiendo el mejor."; } },
+      { keywords: [/hoy|qué día es|fecha|qué día|en qué año estamos|fecha actual/i], response: (msg) => { const today = new Date(); const formatted = today.toLocaleDateString('es-MX', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }); return `📅 Hoy es ${formatted}. ¿Necesitas algo en particular?`; } },
+      { keywords: [/clima|temperatura|tiempo|hace frío|hace calor|llueve|qué clima hace/i], response: "🌤️ No tengo acceso a información del clima en tiempo real, pero puedo ayudarte con nuestros productos tecnológicos. ¿Qué te gustaría saber?" },
+      { keywords: [/broma|chiste|hazme reír|cuéntame un chiste|diviérteme|algo gracioso/i], response: "😂 ¿Qué le dice una impresora a otra impresora? ¡Esa hoja es mía! 🖨️ ¿Te gustó? Ahora, ¿en qué puedo ayudarte con tecnología?" },
+      { keywords: [/quiero hablar con un humano|atención al cliente|con un asesor|hablar con alguien|me comunico con un agente|pasar con un operador/i], response: "📞 Claro, puedo transferirte con un asesor humano. Comunícate al 800-NOVA-TEC o escribe a hola@novastore.mx. Nuestro horario de atención es de lunes a viernes de 9am a 8pm. ¿Necesitas algo más mientras tanto?" },
+      { keywords: [/horas|qué hora es|tienes la hora|hora actual|qué hora marca/i], response: (msg) => { const now = new Date(); const hours = now.getHours().toString().padStart(2,'0'); const minutes = now.getMinutes().toString().padStart(2,'0'); return `🕐 Son las ${hours}:${minutes}. ¿En qué más puedo ayudarte?`; } },
+      { keywords: [/qué tal|qué hay|qué pasó|cómo va todo|todo bien/i], response: "¡Todo excelente por aquí! 🌟 Siempre listo para ayudarte. ¿Tú cómo vas? ¿Necesitas algo de la tienda?" }
+    ];
+
     function getBotResponse(userMessage) {
       const msg = userMessage.toLowerCase().trim();
-      
-      // Saludos y estado del bot
-      if (msg.match(/hola|buenas|qué tal|como estas|hey|saludos|qué onda|qué hay/i)) {
-        return "¡Hola! 👋 Soy Nova, tu asistente virtual. Estoy excelente, gracias por preguntar. ¿En qué puedo ayudarte hoy? 😊";
-      }
-      if (msg.match(/como est[aá]s|qué tal|qué onda|bien y tú/i)) {
-        return "¡Estoy genial! 🌟 Conectado 24/7 para ayudarte con todo sobre tecnología. ¿Tú cómo estás? ¿Necesitas algo?";
-      }
-      if (msg.match(/gracias|thanks|merci/i)) {
-        return "¡De nada! 🙌 Estoy aquí para lo que necesites. ¿Algo más en lo que pueda ayudarte?";
-      }
-      
-      // Preguntas sobre el bot / quien eres
-      if (msg.match(/qu[eé] eres|qui[eé]n eres|qu[eé] haces|para qué sirves|qué puedes hacer/i)) {
-        return "🤖 Soy **Nova Assistant**, tu asistente inteligente de NOVA Store. Puedo ayudarte a encontrar productos, decirte precios, stock, métodos de pago, envíos, garantías, y resolver cualquier duda sobre tecnología. ¡Pregúntame lo que sea!";
-      }
-      
-      // Cantidad de productos / cuántos hay
-      if (msg.match(/cu[aá]ntos productos|cuántos celulares|cuántos hay|cuántos|total de productos/i)) {
-        const total = PRODUCTS.length;
-        const byCat = PRODUCTS.reduce((acc, p) => { acc[p.cat] = (acc[p.cat] || 0) + 1; return acc; }, {});
-        return `📦 Tenemos **${total} productos** en total:\n📱 Smartphones: ${byCat.smartphones || 0}\n💻 Laptops: ${byCat.laptops || 0}\n🎧 Audio: ${byCat.audio || 0}\n🎮 Gaming: ${byCat.gaming || 0}\n⌚ Wearables: ${byCat.wearables || 0}\n¿Quieres ver alguno en específico?`;
-      }
-      
-      // Celulares / smartphones específicos
-      if (msg.match(/qu[eé] celular|qu[eé] smartphone|celulares disponibles|tel[eé]fonos|móviles/i)) {
-        const phones = PRODUCTS.filter(p => p.cat === 'smartphones');
-        if (phones.length === 0) return "No hay smartphones disponibles en este momento.";
-        return `📱 Estos son nuestros smartphones disponibles:\n${phones.map(p => `• ${p.emoji} **${p.name}** — ${formatPrice(p.price)} (⭐${p.rating}) — Stock: ${p.stock} unidades`).join('\n')}\n¿Te interesa alguno?`;
-      }
-      
-      // Laptops
-      if (msg.match(/laptop|computadora|notebook|ultrabook/i)) {
-        const laps = PRODUCTS.filter(p => p.cat === 'laptops');
-        return `💻 Laptops disponibles:\n${laps.map(p => `• ${p.emoji} ${p.name} — ${formatPrice(p.price)} (⭐${p.rating})`).join('\n')}`;
-      }
-      
-      // Audio
-      if (msg.match(/audio|aud[ií]fonos|bocina|speaker|airpods|auriculares/i)) {
-        const audios = PRODUCTS.filter(p => p.cat === 'audio');
-        return `🎧 En audio tenemos:\n${audios.map(p => `• ${p.emoji} ${p.name} — ${formatPrice(p.price)}`).join('\n')}`;
-      }
-      
-      // Gaming
-      if (msg.match(/gaming|gamer|control|gamepad|teclado|mouse/i)) {
-        const games = PRODUCTS.filter(p => p.cat === 'gaming');
-        return `🎮 Para gaming:\n${games.map(p => `• ${p.emoji} ${p.name} — ${formatPrice(p.price)}`).join('\n')}`;
-      }
-      
-      // Stock / disponibilidad
-      if (msg.match(/stock|disponible|hay|disponibilidad|cantidad|cuántas unidades/i)) {
-        const productMatch = PRODUCTS.find(p => msg.includes(p.name.toLowerCase()) || msg.includes(p.emoji));
-        if (productMatch) {
-          return `📦 **${productMatch.name}** tiene **${productMatch.stock} unidades** disponibles en stock. ¿Quieres agregarlo al carrito?`;
-        }
-        return "¿De qué producto quieres saber el stock? Dime el nombre (ej: ProMax X15) y te digo cuántas unidades tenemos.";
-      }
-      
-      // Precio de producto específico
-      if (msg.match(/precio|cu[aá]nto cuesta|valor|cuesta/i)) {
-        const productMatch = PRODUCTS.find(p => msg.includes(p.name.toLowerCase()) || msg.includes(p.emoji));
-        if (productMatch) {
-          return `💰 **${productMatch.name}** tiene un precio de **${formatPrice(productMatch.price)}**. ⭐ Calificación: ${productMatch.rating}/5. ¿Te interesa comprarlo?`;
-        }
-        return "🔍 ¿De qué producto quieres saber el precio? Por ejemplo: 'Precio del ProMax X15' o 'Cuánto cuesta el UltraBook'.";
-      }
-      
-      // Métodos de pago
-      if (msg.match(/pago|m[eé]todo de pago|formas de pago|cómo pago|pagar|tarjeta|efectivo|msi|paypal|oxxo|transferencia/i)) {
-        return "💳 Aceptamos múltiples métodos de pago:\n• Tarjetas de crédito/débito (Visa, Mastercard)\n• Mercado Pago\n• PayPal\n• Transferencia bancaria\n• Pago en OXXO (efectivo)\n• **Hasta 18 MSI** sin intereses en compras mayores a $3,000\n¿Necesitas ayuda con algún método en particular?";
-      }
-      
-      // Envíos
-      if (msg.match(/env[ií]o|entrega|llegada|tiempo de entrega|shipping|días|gratis/i)) {
-        return "📦 **Envíos:**\n• Envío GRATIS en compras mayores a $2,000\n• Envío estándar $149 (3-5 días hábiles)\n• Envío express $249 (24-48hrs en CDMX)\n• Entregamos a todo México.\n¿Quieres cotizar el envío de algún producto?";
-      }
-      
-      // Garantía
-      if (msg.match(/garant[ií]a|devoluci[oó]n|soporte|reclamo|falla|problema/i)) {
-        return "🛡 **Garantía y devoluciones:**\n• Todos los productos tienen garantía oficial de 1 año.\n• Laptops y smartphones: 2 años de garantía.\n• Devolución gratuita en los primeros 15 días.\n• Soporte técnico disponible por chat, email o teléfono.\n¿Necesitas hacer válida una garantía?";
-      }
-      
-      // Ofertas / descuentos
-      if (msg.match(/oferta|descuento|promo|rebaja|barato|económico/i)) {
-        return "🔥 ¡Sí tenemos ofertas activas! Actualmente:\n• ProMax X15 Ultra: -15% (ahora $12,749)\n• UltraBook Pro 14: -20% (ahora $17,599)\n• GamePad XR Elite: -25% (ahora $2,099)\nRevisa la sección de Ofertas Especiales. ¿Quieres que te muestre alguno?";
-      }
-      
-      // Producto más caro / más barato
-      if (msg.match(/m[aá]s caro|m[aá]s barato|mejor precio|producto top/i)) {
-        const mostExpensive = [...PRODUCTS].sort((a,b) => b.price - a.price)[0];
-        const cheapest = [...PRODUCTS].sort((a,b) => a.price - b.price)[0];
-        return `💰 **Producto más caro:** ${mostExpensive.emoji} ${mostExpensive.name} — ${formatPrice(mostExpensive.price)}\n🛒 **Producto más barato:** ${cheapest.emoji} ${cheapest.name} — ${formatPrice(cheapest.price)}\n¿Te interesa alguno?`;
-      }
-      
-      // Recomendación por presupuesto
-      if (msg.match(/\$?\d{3,}/)) {
-        const match = msg.match(/\$?(\d{3,})/);
-        if (match) {
-          const budget = parseInt(match[1]);
-          const recom = PRODUCTS.filter(p => p.price <= budget).sort((a,b) => b.rating - a.rating).slice(0,3);
-          if (recom.length) {
-            return `💸 Con un presupuesto de ${formatPrice(budget)}, te recomiendo:\n${recom.map(p => `• ${p.emoji} ${p.name} — ${formatPrice(p.price)} ⭐${p.rating}`).join('\n')}\n¿Quieres más detalles?`;
+      for (let item of CHAT_RESPONSES_DB) {
+        if (item.keywords.some(k => k.test(msg))) {
+          if (typeof item.response === 'function') {
+            return item.response(msg);
           }
-          return `No encontré productos dentro de ${formatPrice(budget)}. ¿Te gustaría ver opciones desde ${formatPrice(Math.min(...PRODUCTS.map(p=>p.price)))}?`;
+          return item.response;
         }
       }
-      
-      // Respuesta por defecto muy amigable y útil
-      return "😊 ¡Hola! Soy Nova, tu asistente. Puedo ayudarte con:\n\n📱 **Productos:** 'Qué celulares hay', 'laptops disponibles', 'precio del ProMax'\n📦 **Stock:** 'Cuántos AirPods hay', 'disponibilidad'\n💳 **Pagos:** 'Métodos de pago', 'MSI', 'PayPal'\n🚚 **Envíos:** 'Envío gratis', 'tiempo de entrega'\n🛡 **Garantía:** 'Garantía', 'devoluciones'\n🔥 **Ofertas:** 'qué ofertas hay'\n\n¿En qué te ayudo hoy?";
+      return "😊 ¡Hola! Soy Nova, tu asistente de NOVA Store. Puedo ayudarte con:\n\n📱 **Productos:** 'Qué celulares hay', 'laptops disponibles', 'precio del ProMax'\n📦 **Stock:** 'Cuántos AirPods hay', 'disponibilidad del UltraBook'\n💳 **Pagos:** 'Métodos de pago', 'MSI', 'PayPal'\n🚚 **Envíos:** 'Envío gratis', 'tiempo de entrega'\n🛡 **Garantía:** 'Garantía', 'devoluciones'\n🔥 **Ofertas:** 'qué ofertas hay'\n📞 **Contacto:** 'teléfono', 'horario de atención'\n\n¿En qué puedo ayudarte hoy?";
     }
-
-    // ==================== FUNCIONES DE UI DEL CHAT ====================
+    
+    // UI del chatbot
     let chatOpen = false, chatGreeted = false;
     const chatMessages = document.getElementById('chatMessages');
     const chatInput = document.getElementById('chatInput');
@@ -410,8 +554,8 @@
       chatbotWrapper.classList.toggle('open', chatOpen);
       if (chatOpen && !chatGreeted) {
         chatGreeted = true;
-        setTimeout(() => addBotMessage("👋 ¡Hola! Soy Nova, tu asistente inteligente. Pregúntame lo que sea: productos, precios, stock, envíos, pagos... ¡lo que necesites!"), 300);
-        setTimeout(() => setQuickReplies(['📱 Qué celulares hay', '💻 Laptops disponibles', '💰 Métodos de pago', '📦 Envío gratis', '🔥 Ofertas', '📊 Cuántos productos hay']), 1500);
+        setTimeout(() => addBotMessage("👋 ¡Hola! Soy Nova, tu asistente inteligente de NOVA Store. Pregúntame lo que sea: qué productos tenemos, precios, stock, métodos de pago, envíos, garantías... ¡estoy aquí para ayudarte!"), 300);
+        setTimeout(() => setQuickReplies(['📱 Qué celulares hay', '💻 Laptops', '💰 Pagos', '📦 Envíos', '🔥 Ofertas', '📞 Contacto']), 1500);
       }
     });
     chatMinimize.addEventListener('click', () => { chatbotWrapper.classList.remove('open'); chatOpen = false; });
@@ -419,13 +563,11 @@
     function addMessage(text, sender) {
       const div = document.createElement('div');
       div.className = `chat-msg ${sender}`;
-      div.innerHTML = text.replace(/\n/g, '<br>');
+      div.innerHTML = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
       chatMessages.appendChild(div);
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
-    function addBotMessage(text) {
-      addMessage(text, 'bot');
-    }
+    function addBotMessage(text) { addMessage(text, 'bot'); }
     function setQuickReplies(options) {
       quickReplies.innerHTML = options.map(opt => `<button class="quick-reply">${opt}</button>`).join('');
       document.querySelectorAll('.quick-reply').forEach(btn => {
@@ -437,65 +579,11 @@
       addMessage(text, 'user');
       const response = getBotResponse(text);
       addBotMessage(response);
-      setTimeout(() => setQuickReplies(['📱 Celulares', '💻 Laptops', '💳 Pagos', '📦 Envíos', '🎮 Gaming', '💰 Precios']), 1000);
+      setTimeout(() => setQuickReplies(['📱 Celulares', '💻 Laptops', '💳 Pagos', '📦 Envíos', '🎮 Gaming', '💰 Precios', '📞 Contacto', '🛡 Garantía']), 1000);
     }
     function sendChat() { const val = chatInput.value.trim(); if (val) { chatInput.value = ''; handleUserMessage(val); } }
     document.getElementById('chatSend').addEventListener('click', sendChat);
     chatInput.addEventListener('keypress', e => { if (e.key === 'Enter') sendChat(); });
-    
-    function formatPrice(n) { return '$' + n.toLocaleString('es-MX'); }
-    
-    // ==================== RENDER PRODUCTOS Y OFERTAS ====================
-    function renderProducts() {
-      const grid = document.getElementById('productsGrid');
-      let filtered = activeCategory === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cat === activeCategory);
-      grid.innerHTML = filtered.map(p => `
-        <div class="product-card" data-id="${p.id}">
-          <div class="product-img-wrap">${p.emoji}</div>
-          <div class="product-info">
-            <div class="product-name">${p.name}</div>
-            <div class="product-price">${formatPrice(p.price)}</div>
-            <button class="add-to-cart" data-id="${p.id}">+ Agregar al carrito</button>
-          </div>
-        </div>
-      `).join('');
-      document.querySelectorAll('.add-to-cart').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); addToCart(parseInt(btn.dataset.id)); }));
-      document.querySelectorAll('.product-card').forEach(card => card.addEventListener('click', () => openModal(parseInt(card.dataset.id))));
-    }
-    function renderOffers() {
-      const grid = document.getElementById('offersGrid');
-      grid.innerHTML = OFFER_IDS.map(({ id, discount }) => {
-        const p = PRODUCTS.find(x => x.id === id);
-        const newPrice = Math.round(p.price * (1 - discount/100));
-        return `<div class="offer-card" style="position:relative"><div class="offer-badge">-${discount}%</div><div class="offer-img">${p.emoji}</div><div class="offer-info"><h3>${p.name}</h3><span class="offer-new-price">${formatPrice(newPrice)}</span><span class="offer-old-price">${formatPrice(p.price)}</span><button class="btn btn-primary" style="margin-top:12px; width:100%" onclick="addToCart(${id})">Aprovechar</button></div></div>`;
-      }).join('');
-    }
-    function addToCart(id) { const p = PRODUCTS.find(x => x.id === id); if (!p) return; const existing = cart.find(i => i.id === id); existing ? existing.qty++ : cart.push({ id, qty: 1 }); saveCart(); showNotification(`🛒 ${p.name} agregado`); }
-    function saveCart() { localStorage.setItem('nova_cart', JSON.stringify(cart)); updateCartCount(); renderCartItems(); }
-    function updateCartCount() { document.getElementById('cartCount').textContent = cart.reduce((s,i) => s + i.qty, 0); }
-    function renderCartItems() { const container = document.getElementById('cartItems'); if (cart.length === 0) { container.innerHTML = '<p style="text-align:center">Carrito vacío</p>'; document.getElementById('cartTotal').textContent = '$0'; return; } let total = 0; container.innerHTML = cart.map(item => { const p = PRODUCTS.find(x => x.id === item.id); if (!p) return ''; const subt = p.price * item.qty; total += subt; return `<div style="display:flex; justify-content:space-between; margin-bottom:12px"><span>${p.name} x${item.qty}</span><span>${formatPrice(subt)}</span><button onclick="removeFromCart(${item.id})" style="background:red; color:white; border:none; border-radius:50%; width:24px; height:24px;">✕</button></div>`; }).join(''); document.getElementById('cartTotal').textContent = formatPrice(total); }
-    function removeFromCart(id) { cart = cart.filter(i => i.id !== id); saveCart(); showNotification('Producto eliminado'); }
-    function checkout() { if (cart.length === 0) showNotification('Carrito vacío'); else { showNotification('✅ Pedido realizado. Gracias por tu compra!'); cart = []; saveCart(); closeCart(); } }
-    function closeCart() { document.getElementById('cartDrawer').classList.remove('open'); }
-    function openModal(id) { const p = PRODUCTS.find(x => x.id === id); const modal = document.getElementById('productModal'); document.getElementById('modalContent').innerHTML = `<div style="text-align:center"><div style="font-size:4rem">${p.emoji}</div><h2>${p.name}</h2><p>${p.desc}</p><p><strong>${formatPrice(p.price)}</strong></p><p>⭐ ${p.rating}/5</p><p>📦 Stock: ${p.stock} unidades</p><button class="btn btn-primary" onclick="addToCart(${p.id}); closeModal()">Agregar al carrito</button></div>`; modal.classList.add('open'); }
-    function closeModal() { document.getElementById('productModal').classList.remove('open'); }
-    function showNotification(msg) { const notif = document.getElementById('notification'); notif.textContent = msg; notif.classList.add('show'); setTimeout(() => notif.classList.remove('show'), 2500); }
-    
-    // Eventos y categorías
-    document.querySelectorAll('.cat-chip').forEach(chip => chip.addEventListener('click', () => { document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active')); chip.classList.add('active'); activeCategory = chip.dataset.cat; renderProducts(); }));
-    document.getElementById('cartToggle').addEventListener('click', () => { document.getElementById('cartDrawer').classList.add('open'); renderCartItems(); });
-    document.getElementById('cartClose').addEventListener('click', closeCart);
-    document.getElementById('modalClose').addEventListener('click', closeModal);
-    document.getElementById('themeToggle').addEventListener('click', () => { const dark = document.documentElement.dataset.theme === 'dark'; document.documentElement.dataset.theme = dark ? 'light' : 'dark'; localStorage.setItem('nova_theme', dark ? 'light' : 'dark'); });
-    const savedTheme = localStorage.getItem('nova_theme') || 'light'; document.documentElement.dataset.theme = savedTheme;
-    document.getElementById('hamburger').addEventListener('click', () => document.getElementById('nav').classList.toggle('open'));
-    window.removeFromCart = removeFromCart; window.checkout = checkout; window.addToCart = addToCart; window.closeModal = closeModal;
-    
-    renderProducts(); renderOffers(); updateCartCount();
-    
-    // Scroll reveal
-    const observer = new IntersectionObserver((entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
